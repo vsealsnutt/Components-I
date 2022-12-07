@@ -87,6 +87,24 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Jabberwocky',
+    date: 'Dec 27th, 1871',
+    firstParagraph: `Twas brillig, and the slithy toves
+          Did gyre and gimble in the wabe:
+          All mimsy were the borogoves,
+          And the mome raths outgrabe. `,
+
+    secondParagraph: `“Beware the Jabberwock, my son!
+          The jaws that bite, the claws that catch!
+          Beware the Jubjub bird, and shun
+          The frumious Bandersnatch!” `,
+
+    thirdParagraph: `He took his vorpal sword in hand;
+          Long time the manxome foe he sought—
+          So rested he by the Tumtum tree
+          And stood awhile in thought.`
   }
 ];
 
@@ -115,3 +133,44 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+function articleMaker(articleObj) {
+
+  const articleWrapper = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const articleFirstParagraph = document.createElement('p');
+  const articleSecondParagraph = document.createElement('p');
+  const articleThirdParagraph = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  articleWrapper.classList.add('article');
+  articleDate.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+  articleWrapper.appendChild(articleTitle);
+  articleWrapper.appendChild(articleDate);
+  articleWrapper.appendChild(articleFirstParagraph);
+  articleWrapper.appendChild(articleSecondParagraph);
+  articleWrapper.appendChild(articleThirdParagraph);
+  articleWrapper.appendChild(expandButton);
+
+  articleTitle.textContent = articleObj.title;
+  articleDate.textContent = articleObj.date;
+  articleFirstParagraph.textContent = articleObj.firstParagraph;
+  articleSecondParagraph.textContent = articleObj.secondParagraph;
+  articleThirdParagraph.textContent = articleObj.thirdParagraph;
+  expandButton.textContent = '+';
+
+  expandButton.addEventListener('click', () => {
+    articleWrapper.classList.toggle('article-open');
+  })
+
+  return articleWrapper;
+}
+
+console.log(articleMaker(data));
+
+data.forEach(article => {
+  document.querySelector('div.articles').appendChild(articleMaker(article));
+})
